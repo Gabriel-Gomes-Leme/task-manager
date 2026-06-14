@@ -1,0 +1,82 @@
+import { Status, type taskModel } from "../../models/taskModel";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+type taskProps={
+    state: taskModel
+}
+
+export function Task({state} : taskProps){
+    return(
+        <div
+                key={state.id}
+                className="
+                    flex
+                    items-center
+                    justify-between
+                    px-6
+                    py-5
+                    border-b
+                    border-slate-100
+                    hover:bg-slate-50
+                    transition
+                "
+              >
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    checked={state.status === Status.CONCLUIDA}
+                    readOnly
+                    className="w-5 h-5"
+                  />
+
+                  <div>
+                    <h3 className="font-semibold text-slate-800">
+                      {state.title}
+                    </h3>
+
+                    <p className="text-sm text-slate-500">{state.description}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-6">
+                  <span
+                    className={`
+            text-sm
+            font-medium
+            ${
+              state.status === Status.CONCLUIDA
+                ? "text-green-600"
+                : "text-orange-500"
+            }
+          `}
+                  >
+                    {new Date(state.due_date).toLocaleDateString("pt-BR")}
+                  </span>
+
+                  <button
+                    className="
+            p-2
+            border
+            rounded-lg
+            hover:bg-slate-100
+          "
+                  >
+                    <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
+                  </button>
+
+                  <button
+                    className="
+            p-2
+            border
+            rounded-lg
+            text-red-500
+            hover:bg-red-50
+          "
+                  >
+                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+                  </button>
+                </div>
+              </div>
+    )
+}

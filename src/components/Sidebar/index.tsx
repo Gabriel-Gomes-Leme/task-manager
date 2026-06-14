@@ -1,3 +1,6 @@
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export function Sidebar() {
   return (
     <aside className="w-64 bg-white border-r border-slate-200 p-6 flex flex-col">
@@ -6,14 +9,16 @@ export function Sidebar() {
           TaskManager
         </h1>
 
-        <div className="mt-8 p-4 bg-slate-100 rounded-xl">
-          <p className="font-medium">
+        <div className="mt-8 p-4 bg-slate-100 rounded-xl flex items-center gap-2">
+            <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+          <div>
+            <p className="font-medium">
             Usuário Teste
           </p>
-
           <p className="text-sm text-slate-500">
             dev@example.com
           </p>
+          </div>
         </div>
       </div>
 

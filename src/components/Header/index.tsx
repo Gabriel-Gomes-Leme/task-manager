@@ -1,3 +1,6 @@
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export function Header() {
   return (
     <header className="flex items-center justify-between">
@@ -21,9 +24,10 @@ export function Header() {
           font-medium
           hover:bg-violet-700
           transition
+          cursor-pointer
         "
       >
-        Nova Tarefa
+       <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Nova Tarefa
       </button>
     </header>
   );
