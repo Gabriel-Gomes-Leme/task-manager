@@ -2,46 +2,44 @@ import { Status, type taskModel } from "../../models/taskModel";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-type taskProps={
-    state: taskModel
-}
+type taskProps = {
+  state: taskModel;
+};
 
-export function Task({state} : taskProps){
-    return(
-        <div
-                key={state.id}
-                className="
+export function Task({ state }: taskProps) {
+  return (
+    <div
+      key={state.id}
+      className={`
+                   ${state.status === Status.CONCLUIDA ? 'bg-green-100' : ''}
                     flex
                     items-center
                     justify-between
                     px-6
                     py-5
-                    border-b
+                    border
                     border-slate-100
                     hover:bg-slate-50
                     transition
-                "
-              >
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    checked={state.status === Status.CONCLUIDA}
-                    readOnly
-                    className="w-5 h-5"
-                  />
+                `}
+    >
+      <div className="flex items-center gap-4">
+        <input
+          type="checkbox"
+          checked={state.status === Status.CONCLUIDA}
+          className="w-5 h-5"
+        />
 
-                  <div>
-                    <h3 className="font-semibold text-slate-800">
-                      {state.title}
-                    </h3>
+        <div>
+          <h3 className="font-semibold text-slate-800">{state.title}</h3>
 
-                    <p className="text-sm text-slate-500">{state.description}</p>
-                  </div>
-                </div>
+          <p className="text-sm text-slate-500">{state.description}</p>
+        </div>
+      </div>
 
-                <div className="flex items-center gap-6">
-                  <span
-                    className={`
+      <div className="flex items-center gap-6">
+        <span
+          className={`
             text-sm
             font-medium
             ${
@@ -50,33 +48,33 @@ export function Task({state} : taskProps){
                 : "text-orange-500"
             }
           `}
-                  >
-                    {new Date(state.due_date).toLocaleDateString("pt-BR")}
-                  </span>
+        >
+          {new Date(state.due_date).toLocaleDateString("pt-BR")}
+        </span>
 
-                  <button
-                    className="
+        <button
+          className="
             p-2
             border
             rounded-lg
             hover:bg-slate-100
           "
-                  >
-                    <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
-                  </button>
+        >
+          <FontAwesomeIcon icon={faPen}></FontAwesomeIcon>
+        </button>
 
-                  <button
-                    className="
+        <button
+          className="
             p-2
             border
             rounded-lg
             text-red-500
             hover:bg-red-50
           "
-                  >
-                    <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
-                  </button>
-                </div>
-              </div>
-    )
+        >
+          <FontAwesomeIcon icon={faTrash}></FontAwesomeIcon>
+        </button>
+      </div>
+    </div>
+  );
 }

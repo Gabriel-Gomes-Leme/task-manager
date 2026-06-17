@@ -4,7 +4,7 @@ import type { TaskActionModels } from "./taskAction";
 export function taskReducer(
     state: taskModel[],
     action: TaskActionModels
-):taskModel[]{
+): taskModel[] {
     console.log(action.type);
   switch (action.type) {
     case "ADD_TASK":

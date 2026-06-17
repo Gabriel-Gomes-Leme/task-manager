@@ -3,7 +3,7 @@ export enum Status {
     CONCLUIDA = 'Concluída'
 } 
 export type taskModel ={
-    id: number,
+    id: string,
     title: string,
     description: string,
     status: Status,

@@ -1,6 +1,5 @@
 import { createContext } from "react"
 import type { TaskActionModels } from "../components/reducers/taskAction"
-import { tasks } from "../data/tasks"
 import type { taskModel } from "../models/taskModel"
 
 export type TaskState = taskModel[];
@@ -11,7 +10,7 @@ type taskContextProps ={
 }
 
 const initialContextValue : taskContextProps ={
-    state: tasks,
+    state: [],
     dispatch: () => {}
 }
 

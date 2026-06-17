@@ -1,7 +1,11 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function Header() {
+type HeaderProps = {
+  onOpen: () => void;
+};
+
+export function Header({ onOpen }: HeaderProps) {
   return (
     <header className="flex items-center justify-between">
       <div>
@@ -15,6 +19,8 @@ export function Header() {
       </div>
 
       <button
+        type="button"
+        onClick={onOpen}
         className="
           bg-violet-600
           text-white
@@ -27,7 +33,7 @@ export function Header() {
           cursor-pointer
         "
       >
-       <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon> Nova Tarefa
+        <FontAwesomeIcon icon={faPlus} /> Nova Tarefa
       </button>
     </header>
   );
