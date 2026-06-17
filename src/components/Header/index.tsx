@@ -7,7 +7,7 @@ type HeaderProps = {
 
 export function Header({ onOpen }: HeaderProps) {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div>
         <h2 className="text-3xl font-bold text-slate-800">
           Minhas Tarefas
@@ -22,6 +22,8 @@ export function Header({ onOpen }: HeaderProps) {
         type="button"
         onClick={onOpen}
         className="
+          w-full
+          md:w-auto
           bg-violet-600
           text-white
           px-5

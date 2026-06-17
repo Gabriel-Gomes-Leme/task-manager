@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import { useTaskContext } from "../../contexts/useTaskContext";
 import { TaskActionTypes } from "../reducers/taskAction";
 import { Status, type taskModel } from "../../models/taskModel";
@@ -7,23 +7,17 @@ import { showMessage } from "../../adapters/showMessage";
 type NewTaskModalProps = {
   open: boolean;
   onClose: () => void;
+  taskToEdit?: taskModel;
 };
 
-export function NewTaskModal({ open, onClose }: NewTaskModalProps) {
-  const { state, dispatch } = useTaskContext();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
+export function NewTaskModal({ open, onClose, taskToEdit }: NewTaskModalProps) {
+  const { dispatch } = useTaskContext();
+  const [title, setTitle] = useState(taskToEdit?.title ?? "");
+  const [description, setDescription] = useState(taskToEdit?.description ?? "");
+  const [dueDate, setDueDate] = useState(
+    taskToEdit ? new Date(taskToEdit.due_date).toISOString().slice(0, 10) : ""
+  );
   const [error, setError] = useState("");
-
-//   useEffect(() => {
-//     if (!open) {
-//       setTitle("");
-//       setDescription("");
-//       setDueDate("");
-//       setError("");
-//     }
-//   }, [open]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,18 +33,23 @@ export function NewTaskModal({ open, onClose }: NewTaskModalProps) {
       return;
     }
 
-    const newTask: taskModel = {
-      id: Date.now().toString(),
+    const taskPayload: taskModel = {
+      id: taskToEdit ? taskToEdit.id : Date.now(),
       title: title.trim(),
       description: description.trim(),
-      status: Status.PENDENTE,
+      status: taskToEdit ? taskToEdit.status : Status.PENDENTE,
       due_date: dueDateTimestamp,
     };
-    console.log(newTask)
-    console.log(state)
 
-    dispatch({ type: TaskActionTypes.ADD_TASK, payload: newTask });
-    showMessage.success("Tarefa criada!");
+    if (taskToEdit) {
+      dispatch({ type: TaskActionTypes.UPDATE_TASK, payload: taskPayload });
+      showMessage.success("Tarefa atualizada!");
+    } else {
+      dispatch({ type: TaskActionTypes.ADD_TASK, payload: taskPayload });
+      showMessage.success("Tarefa criada!");
+    }
+
+    onClose();
   }
 
   if (!open) {
@@ -59,7 +58,7 @@ export function NewTaskModal({ open, onClose }: NewTaskModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4">
-      <div className="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+      <div className="w-full max-w-xl sm:max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-5">
           <div>
             <h2 className="text-2xl font-semibold text-slate-900">Nova tarefa</h2>

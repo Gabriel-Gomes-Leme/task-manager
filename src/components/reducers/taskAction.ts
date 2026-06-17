@@ -1,20 +1,21 @@
 import type { taskModel } from "../../models/taskModel"
 
-export enum TaskActionTypes {
-    ADD_TASK = 'ADD_TASK',
-    UPDATE_TASK = 'UPDATE_TASK',
-    DELETE_TASK = 'DELETE_TASK'
-}
+export const TaskActionTypes = {
+    ADD_TASK: 'ADD_TASK',
+    UPDATE_TASK: 'UPDATE_TASK',
+    DELETE_TASK: 'DELETE_TASK'
+} as const;
 
-export type TaskActionModels = |{
-        type: TaskActionTypes.ADD_TASK,
+export type TaskActionModels =
+    | {
+        type: typeof TaskActionTypes.ADD_TASK,
         payload: taskModel
     }
     | {
-        type: TaskActionTypes.UPDATE_TASK,
-        payload: {card: taskModel}
+        type: typeof TaskActionTypes.UPDATE_TASK,
+        payload: taskModel
     }
     | {
-        type: TaskActionTypes.DELETE_TASK,
+        type: typeof TaskActionTypes.DELETE_TASK,
         payload: number
     }

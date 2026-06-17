@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function Sidebar() {
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 p-6 flex flex-col">
+    <aside className="w-full lg:w-64 bg-white border-b border-slate-200 lg:border-b-0 lg:border-r p-6 flex flex-col">
       <div>
         <h1 className="text-2xl font-bold text-violet-600">
           TaskManager
         </h1>
 
-        <div className="mt-8 p-4 bg-slate-100 rounded-xl flex items-center gap-2">
+        <div className="mt-8 p-4 bg-slate-100 rounded-xl flex flex-col gap-3 sm:flex-row sm:items-center">
             <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
           <div>
             <p className="font-medium">
