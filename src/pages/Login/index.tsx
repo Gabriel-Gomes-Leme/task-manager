@@ -26,6 +26,7 @@ export function Login() {
     }
 
     if (email === user.email && password === user.password) {
+      localStorage.setItem("isLogged", "true");
       showMessage.success("Acessando TaskManager");
       navigate("/dashboard");
       return;
@@ -49,13 +50,6 @@ export function Login() {
 
         <Form onSubmit={handleLogin} isLoading={isLoading} />
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-slate-500">Usuário de teste:</p>
-
-          <p className="text-sm text-slate-700 mt-1">dev@example.com</p>
-
-          <p className="text-sm text-slate-700">password</p>
-        </div>
       </div>
     </main>
   );

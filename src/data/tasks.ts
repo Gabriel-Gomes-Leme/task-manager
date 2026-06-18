@@ -1,18 +1,18 @@
 import { Status, type taskModel } from "../models/taskModel";
 
 export const tasks: taskModel[] = [
-  {
+   {
     id: 1,
-    title: 'Ir ao mercado',
-    description: 'Fazer as seguintes compras: Arroz, Feijão e Carne',
-    status: Status.CONCLUIDA,
-    due_date: new Date('2026-06-30').getTime(),
+    title: "Implementar autenticação",
+    description: "Criar validação de login e proteção de rotas",
+    status: Status.PENDENTE,
+    due_date: new Date("2026-07-05").getTime(),
   },
   {
     id: 2,
-    title: 'Estudar React',
-    description: 'Aprender desde os hooks até rotas',
-    status: Status.PENDENTE,
-    due_date: new Date('2026-06-30').getTime(),
+    title: "Finalizar dashboard",
+    description: "Adicionar filtros, modal de tarefas e responsividade",
+    status: Status.CONCLUIDA,
+    due_date: new Date("2026-07-10").getTime(),
   },
 ];

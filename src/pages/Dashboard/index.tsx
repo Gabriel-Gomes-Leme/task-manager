@@ -10,7 +10,7 @@ import { Status, type taskModel } from "../../models/taskModel";
 import { showMessage } from "../../adapters/showMessage";
 
 export function Dashboard() {
-  const {state, dispatch} = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const taskList = state;
   const [modalOpen, setModalOpen] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState<taskModel | null>(null);
@@ -33,10 +33,9 @@ export function Dashboard() {
   function handleDeleteTask(taskId: number) {
     dispatch({ type: TaskActionTypes.DELETE_TASK, payload: taskId });
   }
-  function handleStatus(task: taskModel){
-    showMessage.success('Tarefa concluída')
-    dispatch({type: TaskActionTypes.CHANGE_STATUS, payload: task})
-
+  function handleStatus(task: taskModel) {
+    showMessage.success("Status alterado");
+    dispatch({ type: TaskActionTypes.CHANGE_STATUS, payload: task });
   }
 
   const [filter, setFilter] = useState<"Todas" | Status>("Todas");
@@ -56,6 +55,17 @@ export function Dashboard() {
 
           <Filters currentFilter={filter} onChange={setFilter} />
 
+          {filteredTasks.length < 1 && filter == "Todas" && (
+            <h2 className="mt-6">Sem tarefas</h2>
+          )}
+
+          {filteredTasks.length < 1 && filter == Status.PENDENTE && (
+            <h2 className="mt-6">Sem tarefas pendentes</h2>
+          )}
+          {filteredTasks.length < 1 && filter == Status.CONCLUIDA && (
+            <h2 className="mt-6">Sem tarefas Concluídas</h2>
+          )}
+
           <section className="mt-6 bg-white rounded-2xl border border-slate-200 overflow-hidden">
             {filteredTasks.map((task) => (
               <Task
@@ -63,7 +73,7 @@ export function Dashboard() {
                 key={task.id}
                 onEdit={() => handleEditTask(task)}
                 onDelete={() => handleDeleteTask(task.id)}
-                handleStatus={()=> handleStatus(task)}
+                handleStatus={() => handleStatus(task)}
               />
             ))}
           </section>

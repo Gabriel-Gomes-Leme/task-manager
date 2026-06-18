@@ -1,7 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { showMessage } from "../../adapters/showMessage";
 
 export function Sidebar() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("isLogged");
+    showMessage.success("Sessão finalizada com sucesso");
+    navigate("/");
+  }
+
   return (
     <aside className="w-full lg:w-64 bg-white border-b border-slate-200 lg:border-b-0 lg:border-r p-6 flex flex-col">
       <div>
@@ -25,6 +35,8 @@ export function Sidebar() {
       <div className="flex-1" />
 
       <button
+        type="button"
+        onClick={handleLogout}
         className="
           w-full
           py-3
