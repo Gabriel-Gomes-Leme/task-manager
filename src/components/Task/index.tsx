@@ -1,14 +1,15 @@
 import { Status, type taskModel } from "../../models/taskModel";
-import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type taskProps = {
   state: taskModel;
   onEdit: () => void;
   onDelete: () => void;
+  handleStatus: () => void;
 };
 
-export function Task({ state, onEdit, onDelete }: taskProps) {
+export function Task({ state, onEdit, onDelete, handleStatus }: taskProps) {
   return (
     <div
       key={state.id}
@@ -63,7 +64,22 @@ export function Task({ state, onEdit, onDelete }: taskProps) {
             p-2
             border
             rounded-lg
+            bg-green-300
+            hover:bg-green-400
+            cursor-pointer
+          "
+          onClick={handleStatus}
+        >
+          <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
+        </button>
+        <button
+          type="button"
+          className="
+            p-2
+            border
+            rounded-lg
             hover:bg-slate-100
+            cursor-pointer
           "
           onClick={onEdit}
         >
@@ -78,6 +94,7 @@ export function Task({ state, onEdit, onDelete }: taskProps) {
             rounded-lg
             text-red-500
             hover:bg-red-50
+            cursor-pointer
           "
           onClick={onDelete}
         >

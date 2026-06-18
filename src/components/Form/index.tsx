@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-type FormProps={
-    onSubmit: (
-    email: string,
-    password: string
-  ) => Promise<void>;
-}
+type FormProps = {
+  onSubmit: (email: string, password: string) => Promise<void>;
+  isLoading?: boolean;
+};
 
-export function Form({ onSubmit }: FormProps) {
+export function Form({ onSubmit, isLoading = false }: FormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
@@ -33,6 +31,7 @@ export function Form({ onSubmit }: FormProps) {
           type="email"
           placeholder="Digite seu e-mail"
           value={email}
+          disabled={isLoading}
           onChange={(e) => setEmail(e.target.value)}
           className="
                 w-full
@@ -63,6 +62,7 @@ export function Form({ onSubmit }: FormProps) {
           type="password"
           placeholder="Digite sua senha"
           value={password}
+          disabled={isLoading}
           onChange={(e) => setPassword(e.target.value)}
           className="
                 w-full
@@ -82,6 +82,7 @@ export function Form({ onSubmit }: FormProps) {
 
       <button
         type="submit"
+        disabled={isLoading}
         className="
               w-full
               bg-violet-600
@@ -93,9 +94,11 @@ export function Form({ onSubmit }: FormProps) {
               hover:bg-violet-700
               active:scale-[0.98]
               cursor-pointer
+              disabled:cursor-not-allowed
+              disabled:opacity-60
             "
       >
-        Entrar
+        {isLoading ? "Entrando..." : "Entrar"}
       </button>
     </form>
   );

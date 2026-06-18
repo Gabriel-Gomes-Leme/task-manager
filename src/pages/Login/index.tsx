@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../../components/Form";
 import { user } from "../../data/user";
@@ -5,12 +6,16 @@ import { showMessage } from "../../adapters/showMessage";
 
 export function Login() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(email: string, password: string) {
+    setIsLoading(true);
+
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     if (!email.trim() || !password.trim()) {
       showMessage.error("Por favor, preencha todos os campos");
+      setIsLoading(false);
       return;
     }
     const emailRegex = /\S+@\S+\.\S+/;
@@ -27,6 +32,7 @@ export function Login() {
     }
 
     showMessage.error("Credenciais inválidas");
+    setIsLoading(false);
     return;
   }
 
@@ -41,7 +47,7 @@ export function Login() {
           </p>
         </div>
 
-        <Form onSubmit={handleLogin} />
+        <Form onSubmit={handleLogin} isLoading={isLoading} />
 
         <div className="mt-6 text-center">
           <p className="text-sm text-slate-500">Usuário de teste:</p>
