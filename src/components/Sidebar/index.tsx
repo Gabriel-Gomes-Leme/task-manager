@@ -23,10 +23,10 @@ export function Sidebar() {
             <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
           <div>
             <p className="font-medium">
-            Usuário Teste
+            User Teste
           </p>
           <p className="text-sm text-slate-500">
-            dev@example.com
+            user@example.com.br
           </p>
           </div>
         </div>
@@ -45,6 +45,7 @@ export function Sidebar() {
           text-red-600
           font-medium
           hover:bg-red-100
+          cursor-pointer
         "
       >
         Sair
