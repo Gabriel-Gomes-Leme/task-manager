@@ -22,7 +22,7 @@ export function Sidebar() {
         <div className="mt-8 p-4 bg-slate-100 rounded-xl flex flex-col gap-3 sm:flex-row sm:items-center">
             <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
           <div>
-            <p className="font-medium">
+            <p className="font-medium text-slate-600">
             User Teste
           </p>
           <p className="text-sm text-slate-500">
